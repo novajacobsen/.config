@@ -1,0 +1,300 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = 'lesbian'
+add_newline = false
+
+# Modules in the main prompt
+format = """
+(\
+[   ](bold c_flair bg:none) \
+($cmd_duration )\
+($status )\
+[](bold c_flair)
+)\
+[╭─ ](bold c_flair)\
+  [](b1)\
+    [](c1 bg:b1)${custom.is_repo}\
+    [](c1 bg:b1)$jobs\
+    [$battery](c1 bg:b1)\
+    [](c1 bg:b1)$sudo\
+  [](b1 bg:b2)\
+    [](c2 bg:b2)$username\
+  [](b2 bg:b3)\
+    [](c3 bg:b3)$os\
+    [](c3 bg:b3)$shell\
+  [](b3 bg:b4)\
+    [](c4 bg:b4)$hostname\
+  [](b4 bg:b5)\
+    [](c5 bg:b5)$directory\
+  [](b5 bg:b6)\
+    [](c6 bg:b6)$git_branch\
+  [](b6 bg:b7)\
+    [](c7 bg:b7)$git_status\
+  [](b7)\
+  $fill\
+(is $package)\
+(using $c$cpp$cobol$crystal$dart$elixir$elm$erlang$fennel$fortran$gleam$golang\
+$haskell$haxe$java$julia$kotlin$lua$mojo$nim$nodejs$ocaml$odin$perl$php$purescript\
+$python$rlang$raku$red$ruby$rust$scala$solidity$swift$typst$vlang$zig)\
+(via $buf$bun$cmake$conda$daml$deno$dotnet$gradle$helm$maven$meson$opa$pixi$pulumi$quarto$spack$vagrant$xmake)\
+[─╮](bold c_flair)\
+  $line_break\
+[╰─ ](bold c_flair)\
+  $localip\
+  $shlvl\
+  $singularity\
+  $kubernetes\
+  $nats\
+  $docker_context\
+  $nix_shell\
+  $container\
+  $netns\
+  $gcloud\
+  $openstack\
+  $terraform\
+  $guix_shell\
+  $character\
+"""
+
+# Modules in right prompt
+right_format = """
+$git_state\
+$git_metrics\
+$git_commit\
+[─╯](bold c_flair)\
+"""
+
+[palettes.lesbian]
+b1 = '#D02B00'
+b2 = '#E87126'
+b3 = '#F79553'
+b4 = '#F7F7F7'
+b5 = '#CA5F9F'
+b6 = '#AF518C'
+b7 = '#A0015F'
+c1 = '#161616' 
+c2 = '#161616' 
+c3 = '#161616' 
+c4 = '#161616' 
+c5 = '#161616' 
+c6 = '#161616' 
+c7 = '#161616' 
+c_flair = 'blue'
+c_warn = 'red'
+c_time = 'yellow'
+
+# enable trancient prompts
+[profiles]
+tprompt = """
+[]()$username@\
+[]()$hostname:\
+[](cyan)$directory
+$character\
+"""
+rtprompt = '$time'
+
+[fill]
+symbol = ' '
+
+[cmd_duration]
+min_time = 2_000
+show_milliseconds = true
+style = 'bold c_time'
+format = '[ $duration]($style bg:prev_bg)'
+show_notifications = true
+min_time_to_notify = 45_000
+
+[status]
+disabled = false
+style = 'bold c_warn'
+format = '[$symbol $status]($style bg:prev_bg)'
+
+[time]
+disabled = false
+style = 'bold c_time'
+format = '[$time]($style)'
+
+[battery]
+format = '[$symbol]($style fg_prev bg:prev_bg)'
+full_symbol = '󱈏'
+unknown_symbol = '󰂃'
+empty_symbol =  '󱉝'
+charging_symbol = '󰂅'
+discharging_symbol = '󰁹'
+[[battery.display]] # At 0-10%
+charging_symbol = '󰢜'
+discharging_symbol =  '󰁺'
+threshold = 10
+[[battery.display]] # At 10-20%
+charging_symbol = '󰂆'
+discharging_symbol =  '󰁻'
+threshold = 20
+[[battery.display]] # At 20-30%
+charging_symbol = '󰂇'
+discharging_symbol =  '󰁼'
+threshold = 30
+[[battery.display]] # At 30-40%
+charging_symbol = '󰂈'
+discharging_symbol =  '󰁽'
+threshold = 40
+[[battery.display]] # At 40-50%
+charging_symbol = '󰢝'
+discharging_symbol =  '󰁾'
+threshold = 50
+[[battery.display]] # At 50-60%
+charging_symbol = '󰂉'
+discharging_symbol =  '󰁿'
+threshold = 60
+[[battery.display]] # At 60-70%
+charging_symbol = '󰢞'
+discharging_symbol =  '󰂀'
+threshold = 70
+[[battery.display]] # At 70-80%
+charging_symbol = '󰂊'
+discharging_symbol =  '󰂁'
+threshold = 80
+[[battery.display]] # At 80-90%
+charging_symbol = '󰂋'
+discharging_symbol =  '󰂂'
+threshold = 90
+
+[sudo]
+disabled = false
+format = '[$symbol]($style prev_fg bg:prev_bg)'
+symbol = ''
+
+[username]
+show_always = true
+style_user = 'bold'
+style_root = 'bold'
+format = '[$user]($style prev_fg bg:prev_bg)'
+
+[os]
+disabled = false
+format = '[$symbol]($style prev_fg bg:prev_bg)'
+[os.symbols]
+AIX = ""
+AlmaLinux = ""
+Alpaquita = ""
+Alpine = ""
+ALTLinux = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = ""
+Artix = ""
+Bluefin = ""
+CachyOS = ""
+CentOS = ""
+Debian = ""
+DragonFly = ""
+Elementary = ""
+Emscripten = ""
+EndeavourOS = ""
+Fedora = ""
+FreeBSD = ""
+Garuda = ""
+Gentoo = ""
+HardenedBSD = "󰞌"
+Illumos = ""
+InstantOS = ""
+Ios = "󰀷"
+Kali = ""
+Linux = ""
+Mabox = ""
+Macos = ""
+Manjaro = ""
+Mariner = ""
+MidnightBSD = ""
+Mint = ""
+NetBSD = ""
+NixOS = ""
+Nobara = ""
+OpenBSD = ""
+OpenCloudOS = ""
+openEuler = ""
+openSUSE = ""
+OracleLinux = "󰺡"
+PikaOS = ""
+Pop = ""
+Raspbian = ""
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Redox = "󰀘"
+RockyLinux = ""
+Solus = ""
+SUSE = ""
+Ubuntu = ""
+Ultramarine = ""
+Unknown = ""
+Uos = ""
+Void = ""
+Windows = "󰍲"
+Zorin = ""
+
+[hostname]
+ssh_only = false
+style = 'bold'
+format = '[$hostname]($style prev_fg bg:prev_bg)'
+
+[directory]
+truncate_to_repo = false
+truncation_length = 0
+read_only = ''
+style = 'bold'
+repo_root_style = 'underline'
+format = """
+[\
+$path\
+[( $read_only)]($read_only_style prev_fg bg:prev_bg)\
+]($style prev_fg bg:prev_bg)\
+"""
+repo_root_format = """
+[\
+$before_root_path\
+[$repo_root]($repo_root_style $style prev_fg bg:prev_bg)\
+$path\
+[( $read_only)]($read_only_style prev_fg bg:prev_bg)\
+]($style prev_fg bg:prev_bg)\
+"""
+
+[git_branch]
+symbol = '󰘬'
+format = """
+[\
+[$symbol $branch](bold prev_fg bg:prev_bg)\
+( ➜ [$remote_name:$remote_branch](underline prev_fg bg:prev_bg))\
+](prev_fg bg:prev_bg)\
+"""
+
+[git_status]
+style = ''
+format = '$ahead_behind[$all_status]($style bg:prev_bg)'
+ahead = '[↗${count}](green bg:prev_bg)'
+behind = '[↘${count}](yellow bg:prev_bg)'
+diverged = '[⤮](c_warn bg:prev_bg)[↘${behind_count}](yellow bg:prev_bg)[↗${ahead_count}](green bg:prev_bg)'
+up_to_date = '[✓](green bg:prev_bg)'
+
+
+[localip]
+disabled = false
+format = '[󰣀 $localipv4]($style) '
+
+[character]
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\)'
+
+[git_metrics]
+disabled = false
+
+[git_commit]
+only_detached = false
+tag_disabled = false
+
+[custom.is_repo]
+when = true
+require_repo = true
+format = '[](prev_fg bg:prev_bg)'
+
